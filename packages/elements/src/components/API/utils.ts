@@ -172,3 +172,18 @@ export const isInternal = (node: ServiceChildNode | ServiceNode): boolean => {
 
   return !!data['x-internal'];
 };
+
+export const handleJsonRpcSlug = (
+  node: ServiceChildNode | ServiceNode | OperationNode | undefined,
+  isJSONRPC: boolean,
+  jsonRPCSlug: string,
+): ServiceNode | ServiceChildNode | OperationNode | undefined => {
+  if (node === undefined) {
+    return node;
+  }
+
+  if (isHttpOperation(node.data) && isJSONRPC) {
+    node.data.path = jsonRPCSlug || '/';
+  }
+  return node;
+};

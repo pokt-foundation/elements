@@ -12,6 +12,8 @@ export const ApiElement = createElementClass(API, {
   hideTryIt: { type: 'boolean' },
   hideSchemas: { type: 'boolean' },
   hideInternal: { type: 'boolean' },
+  isJSONRPC: { type: 'boolean', defaultValue: true },
+  jsonRPCSlug: { type: 'string', defaultValue: '/' },
   hideExport: { type: 'boolean' },
   logo: { type: 'string' },
   tryItCredentialsPolicy: { type: 'string' },

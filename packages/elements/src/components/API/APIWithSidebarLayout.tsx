@@ -12,7 +12,7 @@ import * as React from 'react';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 
 import { ServiceNode } from '../../utils/oas/types';
-import { computeAPITree, findFirstNodeSlug, isInternal } from './utils';
+import { computeAPITree, findFirstNodeSlug, handleJsonRpcSlug, isInternal } from './utils';
 
 type SidebarLayoutProps = {
   serviceNode: ServiceNode;
@@ -20,6 +20,8 @@ type SidebarLayoutProps = {
   hideTryIt?: boolean;
   hideSchemas?: boolean;
   hideInternal?: boolean;
+  isJSONRPC?: boolean;
+  jsonRPCSlug?: string;
   hideExport?: boolean;
   exportProps?: ExportButtonProps;
   tryItCredentialsPolicy?: 'omit' | 'include' | 'same-origin';
@@ -32,6 +34,8 @@ export const APIWithSidebarLayout: React.FC<SidebarLayoutProps> = ({
   hideTryIt,
   hideSchemas,
   hideInternal,
+  isJSONRPC,
+  jsonRPCSlug,
   hideExport,
   exportProps,
   tryItCredentialsPolicy,
@@ -45,8 +49,8 @@ export const APIWithSidebarLayout: React.FC<SidebarLayoutProps> = ({
   const location = useLocation();
   const { pathname } = location;
   const isRootPath = !pathname || pathname === '/';
-  const node = isRootPath ? serviceNode : serviceNode.children.find(child => child.uri === pathname);
-
+  const node_1 = isRootPath ? serviceNode : serviceNode.children.find(child => child.uri === pathname);
+  const node = handleJsonRpcSlug(node_1, isJSONRPC || true, jsonRPCSlug || '/');
   const layoutOptions = React.useMemo(
     () => ({ hideTryIt: hideTryIt, hideExport: hideExport || node?.type !== NodeType.HttpService }),
     [hideTryIt, hideExport, node],

@@ -67,7 +67,8 @@ export interface CommonAPIProps extends RoutingProps {
    * @default false
    */
   hideInternal?: boolean;
-
+  isJSONRPC?: boolean;
+  jsonRPCSlug?: string;
   /**
    * Hides export button from being displayed in overview page
    * @default false
@@ -102,6 +103,8 @@ export const APIImpl: React.FC<APIProps> = props => {
     hideTryIt,
     hideSchemas,
     hideInternal,
+    isJSONRPC,
+    jsonRPCSlug,
     hideExport,
     tryItCredentialsPolicy,
     tryItCorsProxy,
@@ -177,6 +180,8 @@ export const APIImpl: React.FC<APIProps> = props => {
           hideTryIt={hideTryIt}
           hideSchemas={hideSchemas}
           hideInternal={hideInternal}
+          isJSONRPC={isJSONRPC}
+          jsonRPCSlug={jsonRPCSlug}
           hideExport={hideExport}
           exportProps={exportProps}
           tryItCredentialsPolicy={tryItCredentialsPolicy}
