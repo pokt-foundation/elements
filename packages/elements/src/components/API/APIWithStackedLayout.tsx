@@ -13,7 +13,7 @@ import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { OperationNode, ServiceNode } from '../../utils/oas/types';
-import { computeTagGroups, TagGroup } from './utils';
+import { computeTagGroups, handleJsonRpcSlug, TagGroup } from './utils';
 
 type TryItCredentialsPolicy = 'omit' | 'include' | 'same-origin';
 
@@ -21,6 +21,8 @@ type StackedLayoutProps = {
   serviceNode: ServiceNode;
   hideTryIt?: boolean;
   hideExport?: boolean;
+  isJSONRPC?: boolean;
+  jsonRPCSlug?: string;
   exportProps?: ExportButtonProps;
   tryItCredentialsPolicy?: TryItCredentialsPolicy;
   tryItCorsProxy?: string;
@@ -44,12 +46,16 @@ export const APIWithStackedLayout: React.FC<StackedLayoutProps> = ({
   serviceNode,
   hideTryIt,
   hideExport,
+  isJSONRPC,
+  jsonRPCSlug,
   exportProps,
   tryItCredentialsPolicy,
   tryItCorsProxy,
 }) => {
   const location = useLocation();
   const { groups } = computeTagGroups(serviceNode);
+  const patchedNode = handleJsonRpcSlug(serviceNode, isJSONRPC || false, jsonRPCSlug || '/');
+  const patchedData = patchedNode === undefined ? serviceNode.data : patchedNode.data;
 
   return (
     <TryItContext.Provider value={{ hideTryIt, tryItCredentialsPolicy, corsProxy: tryItCorsProxy }}>
@@ -57,7 +63,7 @@ export const APIWithStackedLayout: React.FC<StackedLayoutProps> = ({
         <Box w="full" borderB>
           <Docs
             className="sl-mx-auto"
-            nodeData={serviceNode.data}
+            nodeData={patchedData}
             nodeTitle={serviceNode.name}
             nodeType={NodeType.HttpService}
             location={location}

@@ -12,7 +12,7 @@ export const ApiElement = createElementClass(API, {
   hideTryIt: { type: 'boolean' },
   hideSchemas: { type: 'boolean' },
   hideInternal: { type: 'boolean' },
-  isJSONRPC: { type: 'boolean', defaultValue: true },
+  isJSONRPC: { type: 'boolean', defaultValue: false },
   jsonRPCSlug: { type: 'string', defaultValue: '/' },
   hideExport: { type: 'boolean' },
   logo: { type: 'string' },

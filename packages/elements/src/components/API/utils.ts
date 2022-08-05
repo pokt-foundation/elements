@@ -182,7 +182,7 @@ export const handleJsonRpcSlug = (
     return node;
   }
 
-  if (isHttpOperation(node.data) && isJSONRPC) {
+  if (isHttpOperation(node.data) && isJSONRPC === true) {
     node.data.path = jsonRPCSlug || '/';
   }
   return node;

@@ -50,7 +50,7 @@ export const APIWithSidebarLayout: React.FC<SidebarLayoutProps> = ({
   const { pathname } = location;
   const isRootPath = !pathname || pathname === '/';
   const node_1 = isRootPath ? serviceNode : serviceNode.children.find(child => child.uri === pathname);
-  const node = handleJsonRpcSlug(node_1, isJSONRPC || true, jsonRPCSlug || '/');
+  const node = handleJsonRpcSlug(node_1, isJSONRPC || false, jsonRPCSlug || '/');
   const layoutOptions = React.useMemo(
     () => ({ hideTryIt: hideTryIt, hideExport: hideExport || node?.type !== NodeType.HttpService }),
     [hideTryIt, hideExport, node],

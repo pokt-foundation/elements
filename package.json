@@ -69,7 +69,7 @@
     "elements-core": "yarn workspace @stoplight/elements-core",
     "elements-dev-portal": "yarn workspace @stoplight/elements-dev-portal",
     "build": "yarn workspace @stoplight/elements-core build && concurrently -n elements,dev-portal \"yarn workspace @stoplight/elements build\" \"yarn workspace @stoplight/elements-dev-portal build\"",
-		"build.hugo": "yarn build ; mkdir -p hugo ; cp ./packages/elements/dist/web-components.min.js ./hugo/ ; cp ./packages/elements/dist/web-components.min.js.LICENSE.txt ./hugo/",
+		"build.hugo": "yarn build ; mkdir -p hugo ; cp ./packages/elements/dist/web-components.min.js ./hugo/ ; cp ./packages/elements/dist/web-components.min.js.LICENSE.txt ./hugo/ ; cp ./packages/elements/dist/styles.min.css ./hugo/ ",
     "build.docs": "yarn workspace @stoplight/elements build.docs",
     "postbuild": "yarn workspace @stoplight/elements test.packaging && yarn workspace @stoplight/elements-core test.packaging && yarn workspace @stoplight/elements-dev-portal test.packaging",
     "lint": "eslint '{packages,examples}/*/src/**/*.{ts,tsx}'",
